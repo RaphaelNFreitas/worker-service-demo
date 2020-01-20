@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Desenvolvimento\\Palestras\\2019\\Confraternizacao\\WorkerServiceDemo\\WorkerServiceDemo\\WorkerServiceDemo.csproj": {}
+    "C:\\Desenvolvimento\\Palestras\\2020\\Net Core 3.x Deep Dive\\WorkerServiceDemo\\WorkerServiceDemo\\WorkerServiceDemo.csproj": {}
   },
   "projects": {
-    "C:\\Desenvolvimento\\Palestras\\2019\\Confraternizacao\\WorkerServiceDemo\\WorkerServiceDemo\\WorkerServiceDemo.csproj": {
+    "C:\\Desenvolvimento\\Palestras\\2020\\Net Core 3.x Deep Dive\\WorkerServiceDemo\\WorkerServiceDemo\\WorkerServiceDemo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Desenvolvimento\\Palestras\\2019\\Confraternizacao\\WorkerServiceDemo\\WorkerServiceDemo\\WorkerServiceDemo.csproj",
+        "projectUniqueName": "C:\\Desenvolvimento\\Palestras\\2020\\Net Core 3.x Deep Dive\\WorkerServiceDemo\\WorkerServiceDemo\\WorkerServiceDemo.csproj",
         "projectName": "WorkerServiceDemo",
-        "projectPath": "C:\\Desenvolvimento\\Palestras\\2019\\Confraternizacao\\WorkerServiceDemo\\WorkerServiceDemo\\WorkerServiceDemo.csproj",
+        "projectPath": "C:\\Desenvolvimento\\Palestras\\2020\\Net Core 3.x Deep Dive\\WorkerServiceDemo\\WorkerServiceDemo\\WorkerServiceDemo.csproj",
         "packagesPath": "C:\\Users\\rapha\\.nuget\\packages\\",
-        "outputPath": "C:\\Desenvolvimento\\Palestras\\2019\\Confraternizacao\\WorkerServiceDemo\\WorkerServiceDemo\\obj\\",
+        "outputPath": "C:\\Desenvolvimento\\Palestras\\2020\\Net Core 3.x Deep Dive\\WorkerServiceDemo\\WorkerServiceDemo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -51,29 +51,37 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.0, )"
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[3.1.1, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.1.0, )"
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.1, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
-              "version": "[3.1.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.Extensions.Hosting.Systemd": {
               "target": "Package",
-              "version": "[3.1.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.Extensions.Hosting.WindowsServices": {
               "target": "Package",
-              "version": "[3.1.0, )"
+              "version": "[3.1.1, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",
@@ -95,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

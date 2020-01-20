@@ -17,7 +17,10 @@ namespace WorkerServiceDemo
     {
         public static void Main(string[] args)
         {
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "..", "Logs", "Log.txt");
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "..", 
+                "Logs", 
+                "Log.txt");
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
@@ -46,17 +49,17 @@ namespace WorkerServiceDemo
         {
             var host = Host.CreateDefaultBuilder(args);
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+                || RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD)
+                || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                // Microsoft.Extensions.Hosting.Systemd
-                host.UseSystemd();
+                host.UseSystemd();  // Microsoft.Extensions.Hosting.Systemd
                 Log.Information("[+] Running on Linux [+]");
             }
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                // Microsoft.Extensions.Hosting.WindowsServices
-                host.UseWindowsService();
+                host.UseWindowsService(); // Microsoft.Extensions.Hosting.WindowsServices
                 Log.Information("[+] Running on Windows [+]");
             }
 
@@ -74,10 +77,21 @@ namespace WorkerServiceDemo
                {
                    services.AddDbContext<WorkerContext>(options =>
                    {
-                       options.UseSqlServer(hostContext.Configuration.GetConnectionString("ConnectionString"));
+                       if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+                           || RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD)
+                           || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                       {
+                           //options.UseInMemoryDatabase("WorkerServiceDemo");
+                           options.UseSqlite("Data Source=WorkerServiceDemo.db");
+                       }
+
+                       if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                       {
+                           options.UseSqlServer(hostContext.Configuration.GetConnectionString("ConnectionString"));
+                       }
                    }, ServiceLifetime.Singleton);
 
-                   services.AddSingleton(provider => 
+                   services.AddSingleton(provider =>
                        hostContext.Configuration.GetSection("AppSettings").Get<AppSetting>());
 
                    services.AddHostedService<Worker>();
