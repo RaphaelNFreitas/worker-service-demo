@@ -26,18 +26,18 @@ namespace WorkerServiceDemo
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .Enrich.FromLogContext()
-                .WriteTo.Console()
+                .WriteTo.ColoredConsole()
                 .WriteTo.File(path, rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             try
             {
-                Log.Information("Starting up the service");
+                Log.Information("[+] Starting up the service [+]");
                 CreateHostBuilder(args).Build().Run();
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "There was a problem starting the service");
+                Log.Fatal(ex, "[-] There was a problem starting the service [-]");
             }
             finally
             {

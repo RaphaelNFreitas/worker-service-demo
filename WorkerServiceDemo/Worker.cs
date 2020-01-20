@@ -29,8 +29,8 @@ namespace WorkerServiceDemo
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Inicializando Execucao");
-            
+            _logger.LogInformation("[+] Inicializando Execucao [+]");
+
             Task.Factory.StartNew(() =>
              {
                  _fileSystemWatcher = new FileSystemWatcher
@@ -41,6 +41,8 @@ namespace WorkerServiceDemo
                                     | NotifyFilters.FileName
                  };
 
+                 _logger.LogInformation($"[+] Escutando caminho - {_appSetting.CaminhoImagens} [+]");
+
                  _fileSystemWatcher.Created += FileSystemWatcherOnCreated;
                  _fileSystemWatcher.Error += FileSystemWatcherOnError;
                  _fileSystemWatcher.EnableRaisingEvents = true;
@@ -50,7 +52,7 @@ namespace WorkerServiceDemo
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation($"Total de Images: {_context.Imagens.Count()}");
+                _logger.LogInformation($"[+] Total de Images: {_context.Imagens.Count()} [+]");
                 Thread.Sleep(TimeSpan.FromSeconds(30));
             }
 
@@ -70,13 +72,14 @@ namespace WorkerServiceDemo
                 {
                     if (string.IsNullOrEmpty(e.Name))
                         return;
-                    
+
                     _context.Imagens.Add(new Imagem
                     {
                         Caminho = e.FullPath,
                         Nome = e.Name
                     });
                     _context.SaveChanges();
+                    _logger.LogInformation("[+] Nova Imagem Recebida: {image} [+]", e.Name);
 
                 }
                 catch (Exception exception)
