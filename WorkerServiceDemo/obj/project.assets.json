@@ -8333,6 +8333,7 @@
       "Microsoft.Extensions.Hosting >= 3.1.1",
       "Microsoft.Extensions.Hosting.Systemd >= 3.1.1",
       "Microsoft.Extensions.Hosting.WindowsServices >= 3.1.1",
+      "Microsoft.Extensions.Logging >= 3.1.1",
       "Serilog.AspNetCore >= 3.2.0",
       "Serilog.Sinks.ColoredConsole >= 3.0.1"
     ]
@@ -8418,6 +8419,10 @@
             "version": "[3.1.1, )"
           },
           "Microsoft.Extensions.Hosting.WindowsServices": {
+            "target": "Package",
+            "version": "[3.1.1, )"
+          },
+          "Microsoft.Extensions.Logging": {
             "target": "Package",
             "version": "[3.1.1, )"
           },

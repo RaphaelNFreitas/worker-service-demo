@@ -18,6 +18,7 @@ namespace WorkerServiceDemo
         private readonly AppSetting _appSetting;
 
         private FileSystemWatcher _fileSystemWatcher;
+
         public Worker(ILogger<Worker> logger,
             WorkerContext context,
             AppSetting appSetting)
@@ -30,6 +31,9 @@ namespace WorkerServiceDemo
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("[+] Inicializando Execucao [+]");
+
+            if(!Directory.Exists(_appSetting.CaminhoImagens))
+                Directory.CreateDirectory(_appSetting.CaminhoImagens);
 
             Task.Factory.StartNew(() =>
              {

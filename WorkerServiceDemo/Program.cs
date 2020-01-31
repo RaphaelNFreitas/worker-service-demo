@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 using WorkerServiceDemo.Database;
@@ -18,8 +19,8 @@ namespace WorkerServiceDemo
         public static void Main(string[] args)
         {
             var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                "..", 
-                "Logs", 
+                "..",
+                "Logs",
                 "Log.txt");
 
             Log.Logger = new LoggerConfiguration()
@@ -54,17 +55,18 @@ namespace WorkerServiceDemo
                 || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
                 host.UseSystemd();  // Microsoft.Extensions.Hosting.Systemd
-                Log.Information("[+] Running on Linux [+]");
             }
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 host.UseWindowsService(); // Microsoft.Extensions.Hosting.WindowsServices
-                Log.Information("[+] Running on Windows [+]");
             }
+
+            Log.Information($"[+] Running on { RuntimeInformation.OSDescription } [+]");
 
             host
                .ConfigureHostConfiguration(config => config.AddEnvironmentVariables())
+               .ConfigureLogging(builder => builder.AddEventLog())
                .ConfigureAppConfiguration((hostContext, config) =>
                {
                    config.SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
@@ -81,7 +83,6 @@ namespace WorkerServiceDemo
                            || RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD)
                            || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                        {
-                           //options.UseInMemoryDatabase("WorkerServiceDemo");
                            options.UseSqlite("Data Source=WorkerServiceDemo.db");
                        }
 
